@@ -97,7 +97,7 @@ Let's try uploading a php reverse shell and intercept the traffic.
 
 We will be using `php-reverse-shell.php` by [pentestmonkey](https://github.com/pentestmonkey/php-reverse-shell).
 Before uploading the reverse shell make sure to change the `$ip` variable to our machine ip address and `$port`
-to our desired port number.
+to our desired port number. In this case, the our ip address is `10.6.63.224`.
 
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/php-chg-ip.png)
 
