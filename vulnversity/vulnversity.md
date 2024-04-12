@@ -1,9 +1,5 @@
 # [Vulnversity](https://tryhackme.com/r/room/vulnversity)
 
-```
-![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/logo.png)
-```
-
 ## Enumeration
 
 ### Nmap Scan
@@ -100,5 +96,5 @@ We have found a form to upload files.we can take advantage of this feature to up
 Let's try uploading `php-reverse-shell.php` by [pentestmonkey](https://github.com/pentestmonkey/php-reverse-shell) while
 intercepting through burp.
 
-
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/burp-intercept.png)
 
