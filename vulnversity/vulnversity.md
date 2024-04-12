@@ -88,7 +88,7 @@ Progress: 4727 / 4727 (100.00%)
 ===============================================================
 ```
 
-`/internal` directory looks interesting. Let us have a look.
+`/internal` directory looks unusual. Let us have a look.
 
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/internal_directory.png)
 
