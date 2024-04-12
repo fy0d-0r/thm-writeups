@@ -93,8 +93,33 @@ Progress: 4727 / 4727 (100.00%)
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/internal_directory.png)
 
 We have found a form to upload files.we can take advantage of this feature to upload and execute our payload.
-Let's try uploading `php-reverse-shell.php` by [pentestmonkey](https://github.com/pentestmonkey/php-reverse-shell) while
-intercepting through burp.
+Let's try uploading a php reverse shell and intercept the traffic.
+
+We will be using `php-reverse-shell.php` by [pentestmonkey](https://github.com/pentestmonkey/php-reverse-shell).
+Before uploading the reverse shell make sure to change the `$ip` variable to our machine ip address and `$port`
+to our desired port number.
+
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/php-chg-ip.png)
 
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/burp-intercept.png)
 
+
+### sniper location
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/select.png)
+
+### sniper wordlist
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/wordlist.png)
+
+### length diff
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/length-diff.png)
+
+### success
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/success.png)
+
+### listen netcat
+```
+nc -lvnp 1337
+```
+
+### execute the payload
+### gain access
