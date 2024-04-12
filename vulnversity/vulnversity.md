@@ -58,7 +58,8 @@ Service detection performed. Please report any incorrect results at https://nmap
 ```
 ### Gobuster Directory Fuzzing
 
-I will be using Seclist
+I will be using Seclist for directory fuzzing
+
 `gobuster dir --url http://10.10.118.67:3333 -w /opt/SecLists/Discovery/Web-Content/common.txt`
 ```
 ===============================================================
@@ -90,4 +91,9 @@ Progress: 4727 / 4727 (100.00%)
 2024/04/11 23:43:01 Finished
 ===============================================================
 ```
+
+`/internal` directory looks interesting. Let us take a look.
+
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/internal_directory.png)
+
 
