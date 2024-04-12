@@ -97,8 +97,8 @@ Progress: 4727 / 4727 (100.00%)
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/internal_directory.png)
 
 We have found a form to upload files.we can take advantage of this feature to upload and execute our payload.
-
-
+Let's try uploading `php-reverse-shell.php` by [pentestmonkey](https://github.com/pentestmonkey/php-reverse-shell) while
+intercepting through burp.
 
 
 
