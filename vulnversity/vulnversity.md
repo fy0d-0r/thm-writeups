@@ -90,7 +90,7 @@ Progress: 4727 / 4727 (100.00%)
 ===============================================================
 ```
 
-`/internal` directory looks unusual. Let us have a look.
+### Browsing into `/internal` directory
 
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/internal_directory.png)
 
@@ -98,30 +98,35 @@ We have found a form to upload files.we can take advantage of this feature to up
 Let's try uploading a php reverse shell and intercept the traffic.
 
 We will be using `php-reverse-shell.php` by [pentestmonkey](https://github.com/pentestmonkey/php-reverse-shell).
-Before uploading the reverse shell make sure to change the `$ip` variable to our machine ip address and `$port`
-to our desired port number. In this case, the our ip address is `10.6.63.224`.
+Before uploading the reverse shell make sure to change the `$ip` and `$port` variables.
 
+### Modifying `php-reverse-shell.php`
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/php-chg-ip.png)
 
+### Intercepting through Brup Suite
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/burp-intercept.png)
 
-
-### sniper location
+### Selecting `php` for Fuzzing file extensions with intruder
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/select.png)
 
-### sniper wordlist
+### Setting wordlist for fuzzing
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/wordlist.png)
 
-### length diff
+### Acknowledging the difference in length of the response from the server
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/length-diff.png)
 
-### success
+### Looking through the response code and find the word `success`
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/success.png)
 
-### listen netcat
+### Listen netcat at port `1337` for reverse shell
 ```
 nc -lvnp 1337
 ```
 
-### execute the payload
+### Execute the payload
+Browse
+```
+
+```
+
 ### gain access
