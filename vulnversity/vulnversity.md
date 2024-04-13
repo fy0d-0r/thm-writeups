@@ -178,7 +178,7 @@ for faster output
 
 `/bin/systemctl` should not be allowed to run as the owner `root`. We can take advantage of the permission to gain `root` access.
 
-
+### Leveraging `systemd` with `suid` Permission 
 
 Let us create the file named `root.service` under `/tmp` directory
 ```
@@ -222,5 +222,5 @@ Even if your unit.service file does not directly declare dependencies on mount u
 When we create a systemd service unit (let's say `unit.service`) that interacts with specific files or directories, systemd may implicitly infer dependencies on mount units (`.mount` files) that manage the filesystems where these files/directories reside.
 Systemd attempts to ensure that all necessary resources (including filesystems) are available before starting services. If our service requires access to files on certain filesystems, systemd will try to resolve dependencies by referencing the corresponding mount units.
 
-
+Moving our unit file(`root.service`) under different directory such as the home directory of the `bill` and repeating the above procedure will solve the problem.
 
