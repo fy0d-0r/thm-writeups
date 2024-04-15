@@ -1,7 +1,10 @@
 # Linux Privilege Escalation
 
-```
+
 ![image]()
+
+```
+ssh leonard@10.10.17.216
 ```
 
 # Enumeration
