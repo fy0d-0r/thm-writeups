@@ -1,7 +1,6 @@
 # Linux Privilege Escalation
 
-
-![image]()
+![image](https://github.com/fy0d-0r/thm-writeups/blob/main/linux-privilege-escalation/images/img_01.png)
 
 ```
 ssh leonard@10.10.17.216
