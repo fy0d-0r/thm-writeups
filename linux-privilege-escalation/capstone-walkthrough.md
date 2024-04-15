@@ -145,7 +145,9 @@ And nothing returns when we
 18535928   56 -rwsr-xr-x   1 root     root        53776 Mar 18  2020 /usr/libexec/flatpak-bwrap
 ```
 
-Notice that SUID permission is set to `/usr/bin/base64`. Looking up on GTFO Bins, we found
+Notice that SUID permission is set to `/usr/bin/base64`. 
+
+Looking up on GTFO Bins, we found
 ![images](https://github.com/fy0d-0r/thm-writeups/blob/main/linux-privilege-escalation/images/gtfobin-base64-suid.png)
 
 
