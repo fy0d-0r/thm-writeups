@@ -151,7 +151,7 @@ Looking up on GTFO Bins, we found
 ![images](https://github.com/fy0d-0r/thm-writeups/blob/main/linux-privilege-escalation/images/gtfobin-base64-suid.png)
 
 
-We can also see that nothing returns when we find `flag*.txt` files throughout the system, which we already know they do exist. 
+We can also see that nothing returns when we find `flag*.txt` files throughout the system, though we already know they do exist. 
 ```
 [leonard@ip-10-10-17-216 ~]$ find / -type f -name "flag*.txt" 2>/dev/null
 [leonard@ip-10-10-17-216 ~]
