@@ -1,6 +1,6 @@
 # Linux Privilege Escalation
 
-![image](https://github.com/fy0d-0r/thm-writeups/blob/main/linux-privilege-escalation/images/img_01.png)
+![images](https://github.com/fy0d-0r/thm-writeups/blob/main/linux-privilege-escalation/images/img_01.png)
 
 ```
 ssh leonard@10.10.17.216
@@ -145,7 +145,8 @@ And nothing returns when we
 18535928   56 -rwsr-xr-x   1 root     root        53776 Mar 18  2020 /usr/libexec/flatpak-bwrap
 ```
 
-Notice that SUID permission is set to `/usr/bin/base64`.
+Notice that SUID permission is set to `/usr/bin/base64`. Looking up on GTFO Bins, we found
+![images](https://github.com/fy0d-0r/thm-writeups/blob/main/linux-privilege-escalation/images/gtfobin-base64-suid.png)
 
 
 We can also see that nothing returns when we find `flag*.txt` files throughout the system, which we already know they do exist. This means that we do no have permission to list files from certain directories in which thoses flag files exist.
