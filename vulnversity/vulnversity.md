@@ -132,7 +132,10 @@ http://10.10.118.67:3333/internal/uploads/php-reverse-shell.phtml
 ### Gaining Access
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/gain-acc.png)
 
-`cat /etc/passwd`
+```
+cat /etc/passwd
+```
+
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/passwd.png)
 
 ### Upgrading the shell
