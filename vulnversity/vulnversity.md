@@ -142,11 +142,11 @@ cat /etc/passwd
 
 ![logo](https://github.com/fy0d-0r/thm-writeups/blob/main/vulnversity/images/import_pty.png)
 
-## Previledge Escalation
+## Privilege Escalation
 
-### Looking for Files with SUID Permission
-`find / -type f -user root -perm -4000 2>/dev/null`
+### Looking for Files with SUID Permissions
 ```
+$ find / -type f -user root -perm -4000 2>/dev/null
 /usr/bin/newuidmap
 /usr/bin/chfn
 /usr/bin/newgidmap
