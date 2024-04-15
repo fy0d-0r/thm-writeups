@@ -147,7 +147,7 @@ And nothing returns when we
 
 Notice that SUID permission is set to `/usr/bin/base64`. 
 
-Looking up on GTFO Bins, we found
+Looking up on GTFO Bins for `bash64`, we found
 ![images](https://github.com/fy0d-0r/thm-writeups/blob/main/linux-privilege-escalation/images/gtfobin-base64-suid.png)
 
 
