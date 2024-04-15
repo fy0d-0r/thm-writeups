@@ -1,4 +1,4 @@
-# Linux Privilege Escalation
+# Linux Privilege Escalation (Capstone Challenge)
 
 ![images](https://github.com/fy0d-0r/thm-writeups/blob/main/linux-privilege-escalation/images/img_01.png)
 
