@@ -99,17 +99,18 @@ MAILTO=root
 
 ## NFS Enumeration
 
+Try to list mouting information from NFS Server
 ```
-showmount -e 10.10.17.216
-```
-```
+$ showmount -e 10.10.17.216
 clnt_create: RPC: Unable to receive
 ```
 
+And nothing returns when
 ```
 cat /etc/exports
-NO OUTPUT
 ```
+
+
 
 ## Checking SUID Permissions
 
