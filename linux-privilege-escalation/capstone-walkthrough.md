@@ -88,8 +88,7 @@ MAILTO=root
 # |  |  |  |  |
 # *  *  *  *  * user-name  command to be executed
 ```
-
-
+We can see that there is no cron job configured. So, there is less chance of hijacking the process run by the privileged user by putting an executable file under `/home/leonard/scripts` directory we have previously created.
 
 ## NFS Enumeration
 
@@ -99,7 +98,7 @@ $ showmount -e 10.10.17.216
 clnt_create: RPC: Unable to receive
 ```
 
-And nothing returns when
+And nothing returns when we 
 ```
 [leonard@ip-10-10-17-216 ~]$ cat /etc/exports
 ```
@@ -147,7 +146,8 @@ And nothing returns when
 
 Notice that SUID permission is set to `/usr/bin/base64`.
 
-We do have permission to list files from certain directories in which flag files might exist.
+
+We can also see that nothing returns when we find `flag*.txt` files throughout the system, which we already know they do exist. This means that we do no have permission to list files from certain directories in which thoses flag files exist.
 ```
 [leonard@ip-10-10-17-216 ~]$ find / -type f -name "flag*.txt" 2>/dev/null
 [leonard@ip-10-10-17-216 ~]
