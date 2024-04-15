@@ -309,7 +309,7 @@ $ ssh missy@10.10.17.216
 Last login: Mon Jun  7 21:19:11 2021
 [missy@ip-10-10-17-216 ~]$
 ```
-### Flag-1
+### Getting Flag-1
 ```
 [missy@ip-10-10-17-216 ~]$ find . -type f -name "*flag*" 2>/dev/null
 ./Documents/flag1.txt
@@ -342,7 +342,7 @@ uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfi
 [root@ip-10-10-17-216 missy]#
 ```
 
-### Flag-2
+### Getting Flag-2
 
 ```
 [root@ip-10-10-17-216 ~]# cd /home/rootflag
