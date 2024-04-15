@@ -29,9 +29,7 @@ Linux version 3.10.0-1160.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc v
 
 ## Checking `sudo` Privileges
 ```
-sudo -l
-```
-```
+[leonard@ip-10-10-17-216 ~]$ sudo -l
 We trust you have received the usual lecture from the local System
 Administrator. It usually boils down to these three things:
 
