@@ -26,6 +26,7 @@ Kernel \r on an \m
 [leonard@ip-10-10-17-216 ~]$ cat /proc/version
 Linux version 3.10.0-1160.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) ) #1 SMP Mon Oct 19 16:18:59 UTC 2020
 ```
+The operating system we are in is Centos.
 
 ## Checking `sudo` Privileges
 ```
