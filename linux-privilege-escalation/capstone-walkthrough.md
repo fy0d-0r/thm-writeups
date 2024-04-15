@@ -23,7 +23,7 @@ Kernel \r on an \m
 
 ## Checking Kernel Version For Exploit
 ```
-cat /proc/version
+[leonard@ip-10-10-17-216 ~]$ cat /proc/version
 Linux version 3.10.0-1160.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) ) #1 SMP Mon Oct 19 16:18:59 UTC 2020
 ```
 
@@ -43,9 +43,7 @@ Sorry, user leonard may not run sudo on ip-10-10-17-216.
 
 ## Checking Capabilities List
 ```
-getcap -r / 2>/dev/null
-```
-```
+[leonard@ip-10-10-17-216 ~]$ getcap -r / 2>/dev/null
 /usr/bin/newgidmap = cap_setgid+ep
 /usr/bin/newuidmap = cap_setuid+ep
 /usr/bin/ping = cap_net_admin,cap_net_raw+p
@@ -58,25 +56,23 @@ getcap -r / 2>/dev/null
 
 ## Checking `$PATH` Environmental Variable
 ```
-echo $PATH
-```
-```
+[leonard@ip-10-10-17-216 ~]$ echo $PATH
 /home/leonard/scripts:/usr/sue/bin:/usr/lib64/qt-3.3/bin:/home/leonard/perl5/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/bin:/home/le
 onard/.local/bin:/home/leonard/bin
 ```
+`scripts` directory is not created yet so create one.
 ```
 [leonard@ip-10-10-17-216 ~]$ cd /home/leonard/scripts
 -bash: cd: /home/leonard/scripts: No such file or directory
 [leonard@ip-10-10-17-216 ~]$ mkdir /home/leonard/scripts
 [leonard@ip-10-10-17-216 ~]$
 ```
+Since we can create the directory, we have write access to this directory, which is at the highest priority of `$PATH` variable.
 
 ## Checking Cron Jobs
 
 ```
-cat /etc/crontab
-```
-```
+[leonard@ip-10-10-17-216 ~]$ cat /etc/crontab
 SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=root
@@ -105,7 +101,7 @@ clnt_create: RPC: Unable to receive
 
 And nothing returns when
 ```
-cat /etc/exports
+[leonard@ip-10-10-17-216 ~]$ cat /etc/exports
 ```
 
 
@@ -113,9 +109,7 @@ cat /etc/exports
 ## Checking SUID Permissions
 
 ```
-find / -type f -user root -perm -4000 -ls 2>/dev/null
-```
-```
+[leonard@ip-10-10-17-216 ~]$ find / -type f -user root -perm -4000 -ls 2>/dev/null
 16779966   40 -rwsr-xr-x   1 root     root        37360 Aug 20  2019 /usr/bin/base64
 17298702   60 -rwsr-xr-x   1 root     root        61320 Sep 30  2020 /usr/bin/ksu
 17261777   32 -rwsr-xr-x   1 root     root        32096 Oct 30  2018 /usr/bin/fusermount
@@ -161,7 +155,6 @@ We do have permission to list files from certain directories in which flag files
 
 ## Checking `/etc/passwd`
 
-`cat /etc/passwd`
 ```
 [leonard@ip-10-10-17-216 ~]$ cat /etc/passwd
 root:x:0:0:root:/root:/bin/bash
