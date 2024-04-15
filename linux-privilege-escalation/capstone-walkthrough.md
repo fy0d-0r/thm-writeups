@@ -319,7 +319,7 @@ Last login: Mon Jun  7 21:19:11 2021
 [missy@ip-10-10-17-216 ~]$ find . -type f -name "*flag*" 2>/dev/null
 ./Documents/flag1.txt
 [missy@ip-10-10-17-216 ~]$ cat Documents/flag1.txt
-THM-42828719920544
+THM-AUDITED
 ```
 
 ### Checking `sudo` Privileges on `missy`
@@ -354,6 +354,6 @@ uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfi
 [root@ip-10-10-17-216 rootflag]# ls
 flag2.txt
 [root@ip-10-10-17-216 rootflag]# cat flag2.txt
-THM-168824782390238
+THM-AUDITED
 [root@ip-10-10-17-216 rootflag]#
 ```
